@@ -2,16 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import ResultCard from './ResultCard';
 
-/**
- * RESULT GRID COMPONENT:
- * This component displays the list of photos, videos, or gifs.
- * It automatically updates whenever the Redux store changes.
- */
 const ResultGrid = () => {
-  // We grab everything we need from the "search" slice in Redux
   const { results, loading, error, activetab, query } = useSelector((state) => state.search);
 
-  // 1. If it's loading, show a simple message
   if (loading) {
     return (
       <div className="flex justify-center items-center py-20">
@@ -20,30 +13,39 @@ const ResultGrid = () => {
     );
   }
 
-  // 2. If there's an error, show it to the user
   if (error) {
     return (
-      <div className="text-center py-20 text-red-400">
-        <p className="text-xl font-semibold">Oops! {error}</p>
+      <div className="flex flex-col items-center justify-center py-24 text-center px-4">
+        <h2 className="text-xl font-semibold text-red-400 mb-2">Oops!</h2>
+        <p className="text-gray-400 text-sm max-w-md">{error}</p>
       </div>
     );
   }
 
-  // 3. If there are no results yet (and we have searched)
   if (results.length === 0 && query) {
     return (
-      <div className="text-center py-20 text-gray-400">
-        <p className="text-xl">No {activetab} found for "{query}"</p>
+      <div className="flex flex-col items-center justify-center py-24 text-center px-4">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-300">
+          No {activetab} found
+        </h2>
+        <p className="text-gray-500 mt-2 text-sm">
+          Try searching something else for "{query}"
+        </p>
       </div>
     );
   }
 
-  // 4. THE GRID: Map over the results and create a ResultCard for each item
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 max-w-7xl mx-auto">
-      {results.map((item, index) => (
-        <ResultCard key={item.id || index} item={item} type={activetab} />
-      ))}
+    <div className="w-full px-4 mt-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+        {results.map((item, index) => (
+          <ResultCard
+            key={item.id || index}
+            item={item}
+            type={activetab}
+          />
+        ))}
+      </div>
     </div>
   );
 };

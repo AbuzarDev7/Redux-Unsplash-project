@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setQuery, setLoading, setError, setResults, clearResults } from '../redux/features/searchSlice';
 import { fetchData, fetchVideos, fetchGifs } from '../api/mediaApi';
 
-/**
+/** 
  * SEARCH BAR COMPONENT:
  * This is where the user types what they want to find.
  * It uses Redux to store the results so other parts of the app can see them.

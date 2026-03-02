@@ -7,9 +7,9 @@ const Tabs = () => {
   const { activetab } = useSelector((state) => state.search);
 
   const tabs = [
-    { id: 'photos', label: 'Photos', icon: '📸' },
-    { id: 'videos', label: 'Videos', icon: '🎥' },
-    { id: 'gifs', label: 'GIFs', icon: '🎬' },
+    { id: 'photos', label: 'Photos', },
+    { id: 'videos', label: 'Videos', },
+    { id: 'gifs', label: 'GIFs' },
   ];
 
   const handleTabChange = (id) => {
